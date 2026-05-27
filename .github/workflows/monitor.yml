@@ -2,8 +2,8 @@ name: Tripster Price Monitor
 
 on:
   schedule:
-    # Запускается каждые 30 минут
-    - cron: '*/30 * * * *'
+    # Запускается каждые 15 минут
+    - cron: '*/15 * * * *'
   workflow_dispatch:  # Для ручного запуска
 
 jobs:
