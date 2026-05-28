@@ -244,11 +244,16 @@ def main():
                 changes_made = True
                 
             else:
-                # Проверим изменение скидки
+                # Цена не изменилась, но проверим скидку
                 old_discount = old_price.get('discount') or {}
                 new_discount = current_price.get('discount') or {}
                 
-                if old_discount != new_discount:
+                # Сравниваем только значимые поля скидки
+                old_discount_str = json.dumps(old_discount, sort_keys=True)
+                new_discount_str = json.dumps(new_discount, sort_keys=True)
+                
+                if old_discount_str != new_discount_str:
+                    # Скидка изменилась
                     page_url = f"https://experience.tripster.ru/experience/{excursion['id']}/"
                     msg = f"ℹ️ Изменились условия скидки!\n\n"
                     msg += f"<b>Экскурсия:</b> {excursion['title']}\n"
@@ -269,6 +274,7 @@ def main():
                     last_prices[eid] = current_price
                     changes_made = True
                 else:
+                    # Ничего не изменилось
                     last_prices[eid] = current_price
                     print(f"[{excursion['id']}] ✓ Цена не изменилась: {current_price['value']} ₽")
 
