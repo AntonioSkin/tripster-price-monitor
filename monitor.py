@@ -283,15 +283,13 @@ def main():
             print(error_msg)
             send_telegram_message(error_msg)
 
-    # Сохранить обновлённые цены
-    if changes_made or is_first_run:
-        print("\n💾 Сохраняю обновлённые цены...")
-        if save_prices_to_github(last_prices):
-            print("✅ Цены успешно сохранены")
-        else:
-            print("❌ Ошибка при сохранении цен")
+    # Сохранить обновлённые цены ВСЕГДА
+    # (даже если изменений нет, нужно обновить цены на случай если они устарели)
+    print("\n💾 Сохраняю текущие цены...")
+    if save_prices_to_github(last_prices):
+        print("✅ Цены успешно сохранены")
     else:
-        print("\n✓ Изменений не обнаружено, сохранение не требуется")
+        print("❌ Ошибка при сохранении цен")
 
     if is_first_run:
         # Отправить сводку при первом запуске
