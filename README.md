@@ -23,8 +23,8 @@
 1. Перейдите в Settings → Secrets and variables → Actions
 2. Нажмите "New repository secret"
 3. Добавьте два секрета:
-   - `TELEGRAM_BOT_TOKEN` — токен вашего бота (8769652580:AAGihdeaLmLKg9AQlwTf6iWyXUnpxi5OYuE)
-   - `TELEGRAM_CHAT_ID` — ваш Chat ID (371990536)
+   - `TELEGRAM_BOT_TOKEN` — токен вашего бота
+   - `TELEGRAM_CHAT_ID` — ваш Chat ID
 
 ### 2. Готово!
 
