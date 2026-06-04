@@ -9,6 +9,7 @@ import requests
 import json
 import os
 import base64
+from datetime import datetime
 
 # Конфигурация из переменных окружения
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
@@ -45,6 +46,7 @@ HEADERS = {
 }
 
 PRICES_FILE = 'prices.json'
+NOTIFICATIONS_FILE = 'sent_notifications.json'
 
 
 def get_current_price(excursion_id):
@@ -112,6 +114,27 @@ def load_last_prices():
     return {}
 
 
+def load_sent_notifications():
+    """Загрузить историю отправленных уведомлений из GitHub."""
+    if not GITHUB_TOKEN or not GITHUB_REPO:
+        return {}
+    
+    try:
+        owner, repo = GITHUB_REPO.split('/')
+        url = f"https://api.github.com/repos/{owner}/{repo}/contents/{NOTIFICATIONS_FILE}"
+        headers = {
+            'Authorization': f'token {GITHUB_TOKEN}',
+            'Accept': 'application/vnd.github.v3.raw'
+        }
+        resp = requests.get(url, headers=headers)
+        if resp.status_code == 200:
+            return json.loads(resp.text)
+    except Exception as e:
+        print(f"Ошибка при загрузке уведомлений из GitHub: {e}")
+    
+    return {}
+
+
 def save_prices_to_github(prices_data):
     """Сохранить текущие цены в GitHub через API."""
     if not GITHUB_TOKEN or not GITHUB_REPO:
@@ -155,6 +178,44 @@ def save_prices_to_github(prices_data):
             
     except Exception as e:
         print(f"❌ Ошибка при сохранении цен в GitHub: {e}")
+        return False
+
+
+def save_sent_notifications_to_github(notifications_data):
+    """Сохранить историю отправленных уведомлений в GitHub через API."""
+    if not GITHUB_TOKEN or not GITHUB_REPO:
+        return False
+    
+    try:
+        owner, repo = GITHUB_REPO.split('/')
+        url = f"https://api.github.com/repos/{owner}/{repo}/contents/{NOTIFICATIONS_FILE}"
+        
+        headers = {
+            'Authorization': f'token {GITHUB_TOKEN}',
+            'Accept': 'application/vnd.github.v3+json'
+        }
+        
+        # Получить SHA текущего файла
+        sha = get_github_file_sha(NOTIFICATIONS_FILE)
+        
+        # Кодировать содержимое
+        content = base64.b64encode(
+            json.dumps(notifications_data, ensure_ascii=False, indent=2).encode()
+        ).decode()
+        
+        payload = {
+            'message': 'Update sent notifications',
+            'content': content,
+        }
+        
+        if sha:
+            payload['sha'] = sha
+        
+        resp = requests.put(url, headers=headers, json=payload)
+        return resp.status_code in [200, 201]
+            
+    except Exception as e:
+        print(f"❌ Ошибка при сохранении уведомлений в GitHub: {e}")
         return False
 
 
@@ -214,9 +275,11 @@ def main():
     print("=" * 80)
     
     last_prices = load_last_prices()
+    sent_notifications = load_sent_notifications()
     is_first_run = len(last_prices) == 0
     
     print(f"Загружено {len(last_prices)} сохранённых цен")
+    print(f"Загружено {len(sent_notifications)} отправленных уведомлений")
     
     changes_made = False
 
@@ -234,11 +297,16 @@ def main():
                 
             elif current_price['value'] != old_price['value']:
                 # Цена изменилась!
-                msg = format_price_change_message(excursion, old_price, current_price)
-                if send_telegram_message(msg):
-                    print(f"[{excursion['id']}] ✅ Цена изменилась: {old_price['value']} → {current_price['value']}. Уведомление отправлено.")
+                notification_key = f"{eid}_price_change_{current_price['value']}"
+                if notification_key not in sent_notifications:
+                    msg = format_price_change_message(excursion, old_price, current_price)
+                    if send_telegram_message(msg):
+                        print(f"[{excursion['id']}] ✅ Цена изменилась: {old_price['value']} → {current_price['value']}. Уведомление отправлено.")
+                        sent_notifications[notification_key] = datetime.now().isoformat()
+                    else:
+                        print(f"[{excursion['id']}] ⚠️ Ошибка отправки уведомления в Telegram")
                 else:
-                    print(f"[{excursion['id']}] ⚠️ Ошибка отправки уведомления в Telegram")
+                    print(f"[{excursion['id']}] 🔄 Уведомление об этой цене уже отправлено. Дубликат пропущен.")
                 
                 last_prices[eid] = current_price
                 changes_made = True
@@ -254,22 +322,27 @@ def main():
                 
                 if old_discount_str != new_discount_str:
                     # Скидка изменилась
-                    page_url = f"https://experience.tripster.ru/experience/{excursion['id']}/"
-                    msg = f"ℹ️ Изменились условия скидки!\n\n"
-                    msg += f"<b>Экскурсия:</b> {excursion['title']}\n"
-                    msg += f"<b>Цена:</b> {current_price['value']} ₽\n"
-                    if new_discount.get('value'):
-                        msg += f"<b>Скидка:</b> {int(new_discount['value'] * 100)}% (до {new_discount.get('expiration_date', '?')})\n"
-                    elif old_discount.get('value'):
-                        msg += f"<b>Скидка снята</b>\n"
-                    if new_discount.get('original_price'):
-                        msg += f"<b>Цена без скидки:</b> {new_discount['original_price']} ₽\n"
-                    msg += f"\n🔗 <a href='{page_url}'>Открыть на Tripster</a>"
-                    
-                    if send_telegram_message(msg):
-                        print(f"[{excursion['id']}] ✅ Скидка изменилась. Уведомление отправлено.")
+                    discount_key = f"{eid}_discount_{new_discount_str}"
+                    if discount_key not in sent_notifications:
+                        page_url = f"https://experience.tripster.ru/experience/{excursion['id']}/"
+                        msg = f"ℹ️ Изменились условия скидки!\n\n"
+                        msg += f"<b>Экскурсия:</b> {excursion['title']}\n"
+                        msg += f"<b>Цена:</b> {current_price['value']} ₽\n"
+                        if new_discount.get('value'):
+                            msg += f"<b>Скидка:</b> {int(new_discount['value'] * 100)}% (до {new_discount.get('expiration_date', '?')})\n"
+                        elif old_discount.get('value'):
+                            msg += f"<b>Скидка снята</b>\n"
+                        if new_discount.get('original_price'):
+                            msg += f"<b>Цена без скидки:</b> {new_discount['original_price']} ₽\n"
+                        msg += f"\n🔗 <a href='{page_url}'>Открыть на Tripster</a>"
+                        
+                        if send_telegram_message(msg):
+                            print(f"[{excursion['id']}] ✅ Скидка изменилась. Уведомление отправлено.")
+                            sent_notifications[discount_key] = datetime.now().isoformat()
+                        else:
+                            print(f"[{excursion['id']}] ⚠️ Ошибка отправки уведомления в Telegram")
                     else:
-                        print(f"[{excursion['id']}] ⚠️ Ошибка отправки уведомления в Telegram")
+                        print(f"[{excursion['id']}] 🔄 Уведомление об этой скидке уже отправлено. Дубликат пропущен.")
                     
                     last_prices[eid] = current_price
                     changes_made = True
@@ -290,6 +363,13 @@ def main():
         print("✅ Цены успешно сохранены")
     else:
         print("❌ Ошибка при сохранении цен")
+
+    # Сохранить историю отправленных уведомлений
+    print("💾 Сохраняю историю уведомлений...")
+    if save_sent_notifications_to_github(sent_notifications):
+        print("✅ История уведомлений успешно сохранена")
+    else:
+        print("❌ Ошибка при сохранении истории уведомлений")
 
     if is_first_run:
         # Отправить сводку при первом запуске
