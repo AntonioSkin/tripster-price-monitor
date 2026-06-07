@@ -1,16 +1,16 @@
 {
   "51192": {
-    "value": 2800.0,
+    "value": 5250.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "2800 ₽ за одного",
+    "value_string": "5250 ₽ за одного",
     "discount": null
   },
   "57434": {
-    "value": 2900.0,
+    "value": 5200.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "2900 ₽ за одного",
+    "value_string": "5200 ₽ за одного",
     "discount": null
   },
   "96862": {
@@ -21,10 +21,10 @@
     "discount": null
   },
   "51584": {
-    "value": 2800.0,
+    "value": 5100.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "2800 ₽ за одного",
+    "value_string": "5100 ₽ за одного",
     "discount": null
   },
   "85543": {
@@ -40,10 +40,10 @@
     }
   },
   "83542": {
-    "value": 2650.0,
+    "value": 4900.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "2650 ₽ за одного",
+    "value_string": "4900 ₽ за одного",
     "discount": null
   },
   "102873": {
