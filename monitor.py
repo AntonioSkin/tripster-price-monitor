@@ -322,7 +322,10 @@ def main():
                 
                 if old_discount_str != new_discount_str:
                     # Скидка изменилась
-                    discount_key = f"{eid}_discount_{new_discount_str}"
+                    # Создаем ключ только на основе значимых полей скидки
+                    discount_value = new_discount.get('value')
+                    discount_expiration = new_discount.get('expiration_date')
+                    discount_key = f"{eid}_discount_{discount_value}_{discount_expiration}"
                     if discount_key not in sent_notifications:
                         page_url = f"https://experience.tripster.ru/experience/{excursion['id']}/"
                         msg = f"ℹ️ Изменились условия скидки!\n\n"
