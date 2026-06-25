@@ -35,11 +35,16 @@
     "discount": null
   },
   "83542": {
-    "value": 3600.0,
+    "value": 3800.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "3600 ₽ за одного",
-    "discount": null
+    "value_string": "3800 ₽ за одного",
+    "discount": {
+      "value": 0.05,
+      "expiration_date": "2026-07-25",
+      "expiration_text": "",
+      "original_price": 4000.0
+    }
   },
   "102873": {
     "value": 35000.0,
