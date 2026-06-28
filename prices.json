@@ -1,16 +1,16 @@
 {
   "51192": {
-    "value": 6500.0,
+    "value": 5500.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "6500 ₽ за одного",
+    "value_string": "5500 ₽ за одного",
     "discount": null
   },
   "57434": {
-    "value": 6300.0,
+    "value": 5500.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "6300 ₽ за одного",
+    "value_string": "5500 ₽ за одного",
     "discount": null
   },
   "96862": {
@@ -131,15 +131,10 @@
     "discount": null
   },
   "75208": {
-    "value": 55100.0,
+    "value": 45000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "55100 ₽ ",
-    "discount": {
-      "value": 0.05,
-      "expiration_date": "2026-07-15",
-      "expiration_text": "",
-      "original_price": 58000.0
-    }
+    "value_string": "45000 ₽ ",
+    "discount": null
   }
 }
