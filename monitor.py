@@ -10,6 +10,7 @@ import json
 import os
 import base64
 from datetime import datetime
+import time # Добавляем импорт time для задержек
 
 # Конфигурация из переменных окружения
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
@@ -49,7 +50,7 @@ PRICES_FILE = 'prices.json'
 NOTIFICATIONS_FILE = 'sent_notifications.json'
 
 
-def get_current_price(excursion_id):
+def get_current_price(excursion_id, retries=3, delay=5):
     """Получить текущую цену экскурсии через API Tripster."""
     page_url = f'https://experience.tripster.ru/experience/{excursion_id}/'
     api_url = f'https://experience.tripster.ru/api/web/v2/experiences/{excursion_id}/'
@@ -57,19 +58,30 @@ def get_current_price(excursion_id):
     session = requests.Session()
     session.get(page_url, headers={'User-Agent': HEADERS['User-Agent']})
     
-    resp = session.get(api_url, headers={**HEADERS, 'Referer': page_url})
-    if resp.status_code == 200:
-        data = resp.json()
-        price_data = data.get('price', {})
-        return {
-            'value': price_data.get('value'),
-            'currency': price_data.get('currency'),
-            'unit_string': price_data.get('unit_string'),
-            'value_string': price_data.get('value_string'),
-            'discount': price_data.get('discount'),
-        }
-    else:
-        raise Exception(f"API вернул статус {resp.status_code} для экскурсии {excursion_id}")
+    for i in range(retries):
+        try:
+            resp = session.get(api_url, headers={**HEADERS, 'Referer': page_url}, timeout=10)
+            if resp.status_code == 200:
+                data = resp.json()
+                price_data = data.get('price', {})
+                return {
+                    'value': price_data.get('value'),
+                    'currency': price_data.get('currency'),
+                    'unit_string': price_data.get('unit_string'),
+                    'value_string': price_data.get('value_string'),
+                    'discount': price_data.get('discount'),
+                }
+            elif resp.status_code == 404:
+                print(f"[{excursion_id}] ⚠️ Экскурсия не найдена (404). Возможно, удалена.")
+                return None # Return None for 404, indicating it's gone
+            else:
+                print(f"[{excursion_id}] ⚠️ API вернул статус {resp.status_code}. Повторная попытка {i+1}/{retries}...")
+                time.sleep(delay)
+        except requests.exceptions.RequestException as e:
+            print(f"[{excursion_id}] ⚠️ Ошибка запроса: {e}. Повторная попытка {i+1}/{retries}...")
+            time.sleep(delay)
+    print(f"[{excursion_id}] ❌ Все {retries} попыток получить данные завершились неудачей.")
+    return None # Возвращаем None, если все попытки провалились
 
 
 def get_github_file_sha(filename):
@@ -286,7 +298,9 @@ def main():
     for excursion in EXCURSIONS:
         eid = str(excursion['id'])
         try:
-            current_price = get_current_price(excursion['id'])
+            current_price = get_current_price(excursion["id"])
+            if current_price is None:
+                continue # Пропускаем экскурсию, если не удалось получить данные после всех попыток
             old_price = last_prices.get(eid)
 
             if old_price is None:
@@ -355,7 +369,7 @@ def main():
                     print(f"[{excursion['id']}] ✓ Цена не изменилась: {current_price['value']} ₽")
 
         except Exception as e:
-            error_msg = f"⚠️ Ошибка мониторинга экскурсии {excursion['id']}:\n{str(e)}"
+            error_msg = f"⚠️ Ошибка мониторинга экскурсии {excursion[\"id\"]}:\n{str(e)}"
             print(error_msg)
             send_telegram_message(error_msg)
 
