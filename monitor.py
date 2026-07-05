@@ -62,23 +62,27 @@ def get_current_price(excursion_id, retries=3, delay=5):
         try:
             resp = session.get(api_url, headers={**HEADERS, 'Referer': page_url}, timeout=10)
             if resp.status_code == 200:
-                data = resp.json()
-                price_data = data.get('price', {})
-                return {
-                    'value': price_data.get('value'),
-                    'currency': price_data.get('currency'),
-                    'unit_string': price_data.get('unit_string'),
-                    'value_string': price_data.get('value_string'),
-                    'discount': price_data.get('discount'),
-                }
+                try:
+                    data = resp.json()
+                    price_data = data.get('price', {})
+                    return {
+                        'value': price_data.get('value'),
+                        'currency': price_data.get('currency'),
+                        'unit_string': price_data.get('unit_string'),
+                        'value_string': price_data.get('value_string'),
+                        'discount': price_data.get('discount'),
+                    }
+                except json.JSONDecodeError:
+                    print(f"[{excursion_id}] ⚠️ Ошибка декодирования JSON. Повторная попытка {i+1}/{retries}...")
             elif resp.status_code == 404:
                 print(f"[{excursion_id}] ⚠️ Экскурсия не найдена (404). Возможно, удалена.")
-                return None # Return None for 404, indicating it's gone
+                return None
             else:
                 print(f"[{excursion_id}] ⚠️ API вернул статус {resp.status_code}. Повторная попытка {i+1}/{retries}...")
-                time.sleep(delay)
-        except requests.exceptions.RequestException as e:
-            print(f"[{excursion_id}] ⚠️ Ошибка запроса: {e}. Повторная попытка {i+1}/{retries}...")
+            
+            time.sleep(delay)
+        except Exception as e:
+            print(f"[{excursion_id}] ⚠️ Ошибка при получении данных: {e}. Повторная попытка {i+1}/{retries}...")
             time.sleep(delay)
     print(f"[{excursion_id}] ❌ Все {retries} попыток получить данные завершились неудачей.")
     return None # Возвращаем None, если все попытки провалились
@@ -369,9 +373,10 @@ def main():
                     print(f"[{excursion['id']}] ✓ Цена не изменилась: {current_price['value']} ₽")
 
         except Exception as e:
-            error_msg = f"⚠️ Ошибка мониторинга экскурсии {excursion[\"id\"]}:\n{str(e)}"
+            error_msg = f"⚠️ Ошибка при обработке экскурсии {excursion['id']}: {str(e)}"
             print(error_msg)
-            send_telegram_message(error_msg)
+            # Не отправляем в Telegram, чтобы избежать спама при временных сбоях
+            # send_telegram_message(error_msg)
 
     # Сохранить обновлённые цены ВСЕГДА
     # (даже если изменений нет, нужно обновить цены на случай если они устарели)
