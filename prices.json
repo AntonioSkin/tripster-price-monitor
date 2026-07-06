@@ -3,42 +3,42 @@
     "value": 5500.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "5500 ₽ за одного",
+    "value_string": "5500 ₽ за одного",
     "discount": null
   },
   "57434": {
-    "value": 5500.0,
+    "value": 5200.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "5500 ₽ за одного",
+    "value_string": "5200 ₽ за одного",
     "discount": null
   },
   "96862": {
     "value": 9700.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "9700 ₽ за одного",
+    "value_string": "9700 ₽ за одного",
     "discount": null
   },
   "51584": {
     "value": 5200.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "5200 ₽ за одного",
+    "value_string": "5200 ₽ за одного",
     "discount": null
   },
   "85543": {
-    "value": 8990.0,
+    "value": 9750.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "8990 ₽ за одного",
+    "value_string": "9750 ₽ за одного",
     "discount": null
   },
   "83542": {
     "value": 4800.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "4800 ₽ за одного",
+    "value_string": "4800 ₽ за одного",
     "discount": {
       "value": 0.05,
       "expiration_date": "2026-07-16",
@@ -47,94 +47,94 @@
     }
   },
   "102873": {
-    "value": 35000.0,
+    "value": 39000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "35000 ₽ ",
+    "value_string": "39 000 ₽ ",
     "discount": null
   },
   "62177": {
     "value": 56000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "56000 ₽ ",
+    "value_string": "56 000 ₽ ",
     "discount": null
   },
   "58617": {
     "value": 8990.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "8990 ₽ за одного",
+    "value_string": "8990 ₽ за одного",
     "discount": null
   },
   "53900": {
     "value": 6500.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "6500 ₽ за одного",
+    "value_string": "6500 ₽ за одного",
     "discount": null
   },
   "58568": {
     "value": 45500.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "45500 ₽ ",
+    "value_string": "45 500 ₽ ",
     "discount": null
   },
   "70193": {
     "value": 37000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "37000 ₽ ",
+    "value_string": "37 000 ₽ ",
     "discount": null
   },
   "51600": {
     "value": 30000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "30000 ₽ ",
+    "value_string": "30 000 ₽ ",
     "discount": null
   },
   "53155": {
-    "value": 27000.0,
+    "value": 32000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "27000 ₽ ",
+    "value_string": "32 000 ₽ ",
     "discount": null
   },
   "54971": {
     "value": 6300.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "6300 ₽ за одного",
+    "value_string": "6300 ₽ за одного",
     "discount": null
   },
   "55575": {
     "value": 5500.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "5500 ₽ за одного",
+    "value_string": "5500 ₽ за одного",
     "discount": null
   },
   "54209": {
     "value": 44000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "44000 ₽ ",
+    "value_string": "44 000 ₽ ",
     "discount": null
   },
   "52987": {
-    "value": 57000.0,
+    "value": 49000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "57000 ₽ ",
+    "value_string": "49 000 ₽ ",
     "discount": null
   },
   "75208": {
-    "value": 45000.0,
+    "value": 49000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "45000 ₽ ",
+    "value_string": "49 000 ₽ ",
     "discount": null
   }
 }
