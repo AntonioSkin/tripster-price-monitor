@@ -7,7 +7,7 @@
     "discount": {
       "value": 0.1,
       "expiration_date": "2026-07-11",
-      "expiration_text": "ещё 22 часа",
+      "expiration_text": "ещё 21 час",
       "original_price": 5500.0
     }
   },
@@ -19,7 +19,7 @@
     "discount": {
       "value": 0.1,
       "expiration_date": "2026-07-11",
-      "expiration_text": "ещё 22 часа",
+      "expiration_text": "ещё 21 час",
       "original_price": 5500.0
     }
   },
