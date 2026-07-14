@@ -7,31 +7,31 @@
     "discount": {
       "value": 0.1,
       "expiration_date": "2026-07-14",
-      "expiration_text": "ещё 3 часа",
+      "expiration_text": "ещё 2 часа",
       "original_price": 5500.0
     }
   },
   "57434": {
-    "value": 5225.0,
+    "value": 4675.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "5225 ₽ за одного",
+    "value_string": "4675 ₽ за одного",
     "discount": {
-      "value": 0.05,
-      "expiration_date": "2026-07-15",
-      "expiration_text": "ещё 27 часов",
+      "value": 0.15,
+      "expiration_date": "2026-07-14",
+      "expiration_text": "ещё 2 часа",
       "original_price": 5500.0
     }
   },
   "96862": {
-    "value": 8730.0,
+    "value": 8245.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "8730 ₽ за одного",
+    "value_string": "8245 ₽ за одного",
     "discount": {
-      "value": 0.1,
-      "expiration_date": "2026-07-15",
-      "expiration_text": "ещё 27 часов",
+      "value": 0.15,
+      "expiration_date": "2026-07-14",
+      "expiration_text": "ещё 2 часа",
       "original_price": 9700.0
     }
   },
@@ -43,14 +43,14 @@
     "discount": null
   },
   "85543": {
-    "value": 8775.0,
+    "value": 8288.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "8775 ₽ за одного",
+    "value_string": "8288 ₽ за одного",
     "discount": {
-      "value": 0.1,
-      "expiration_date": "2026-07-15",
-      "expiration_text": "ещё 27 часов",
+      "value": 0.15,
+      "expiration_date": "2026-07-14",
+      "expiration_text": "ещё 2 часа",
       "original_price": 9750.0
     }
   },
@@ -123,11 +123,16 @@
     "discount": null
   },
   "54971": {
-    "value": 5500.0,
+    "value": 4675.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "5500 ₽ за одного",
-    "discount": null
+    "value_string": "4675 ₽ за одного",
+    "discount": {
+      "value": 0.15,
+      "expiration_date": "2026-07-14",
+      "expiration_text": "ещё 2 часа",
+      "original_price": 5500.0
+    }
   },
   "55575": {
     "value": 5500.0,
