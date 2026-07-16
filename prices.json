@@ -1,9 +1,9 @@
 {
   "51192": {
-    "value": 4700.0,
+    "value": 5350.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "4700 ₽ за одного",
+    "value_string": "5350 ₽ за одного",
     "discount": null
   },
   "57434": {
@@ -68,10 +68,10 @@
     "discount": null
   },
   "53900": {
-    "value": 6500.0,
+    "value": 5500.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "6500 ₽ за одного",
+    "value_string": "5500 ₽ за одного",
     "discount": null
   },
   "58568": {
