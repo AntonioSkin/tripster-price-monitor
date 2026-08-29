@@ -327,7 +327,9 @@ def main():
                         print(f"[{excursion['id']}] ✅ Цена изменилась: {old_price['value']} → {current_price['value']}. Уведомление отправлено.")
                         sent_notifications[notification_key] = datetime.now().isoformat()
                     else:
-                        print(f"[{excursion['id']}] ⚠️ Ошибка отправки уведомления в Telegram")
+                        print(f"[{excursion['id']}] ⚠️ Ошибка отправки уведомления в Telegram; повторим на следующем запуске")
+                        # Не сохраняем новую цену: следующий запуск повторит уведомление.
+                        continue
                 else:
                     print(f"[{excursion['id']}] 🔄 Уведомление об этой цене уже отправлено. Дубликат пропущен.")
                 
@@ -366,7 +368,9 @@ def main():
                             print(f"[{excursion['id']}] ✅ Скидка изменилась. Уведомление отправлено.")
                             sent_notifications[discount_key] = datetime.now().isoformat()
                         else:
-                            print(f"[{excursion['id']}] ⚠️ Ошибка отправки уведомления в Telegram")
+                            print(f"[{excursion['id']}] ⚠️ Ошибка отправки уведомления в Telegram; повторим на следующем запуске")
+                            # Не сохраняем новую скидку: следующий запуск повторит уведомление.
+                            continue
                     else:
                         print(f"[{excursion['id']}] 🔄 Уведомление об этой скидке уже отправлено. Дубликат пропущен.")
                     
