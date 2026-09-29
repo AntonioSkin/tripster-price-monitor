@@ -173,7 +173,7 @@
     "discount": {
       "value": 0.1,
       "expiration_date": "2026-09-30",
-      "expiration_text": "ещё 43 часа",
+      "expiration_text": "ещё 40 часов",
       "original_price": 30000.0
     }
   }
