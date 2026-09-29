@@ -102,11 +102,16 @@
     }
   },
   "70193": {
-    "value": 45000.0,
+    "value": 40000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "45 000 ₽ ",
-    "discount": null
+    "value_string": "40 000 ₽ ",
+    "discount": {
+      "value": 0.2,
+      "expiration_date": "2026-10-29",
+      "expiration_text": "",
+      "original_price": 50000.0
+    }
   },
   "51600": {
     "value": 28000.0,
@@ -208,7 +213,7 @@
     "discount": {
       "value": 0.1,
       "expiration_date": "2026-09-30",
-      "expiration_text": "ещё 33 часа",
+      "expiration_text": "ещё 27 часов",
       "original_price": 30000.0
     }
   }
