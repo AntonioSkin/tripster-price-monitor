@@ -203,12 +203,12 @@
     }
   },
   "117523": {
-    "value": 42000.0,
+    "value": 36000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "42 000 ₽ ",
+    "value_string": "36 000 ₽ ",
     "discount": {
-      "value": 0.3,
+      "value": 0.4,
       "expiration_date": "2026-10-29",
       "expiration_text": "",
       "original_price": 60000.0
