@@ -105,12 +105,12 @@
     }
   },
   "58568": {
-    "value": 49500.0,
+    "value": 35750.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "49 500 ₽ ",
+    "value_string": "35 750 ₽ ",
     "discount": {
-      "value": 0.1,
+      "value": 0.35,
       "expiration_date": "2026-10-29",
       "expiration_text": "",
       "original_price": 55000.0
@@ -307,7 +307,7 @@
     "discount": {
       "value": 0.4,
       "expiration_date": "2026-10-18",
-      "expiration_text": "ещё 44 часа",
+      "expiration_text": "ещё 42 часа",
       "original_price": 16000.0
     }
   },
