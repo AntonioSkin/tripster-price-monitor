@@ -302,7 +302,7 @@
     "discount": {
       "value": 0.4,
       "expiration_date": "2026-10-18",
-      "expiration_text": "ещё 26 часов",
+      "expiration_text": "ещё 24 часа",
       "original_price": 16000.0
     }
   },
