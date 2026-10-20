@@ -254,10 +254,10 @@
     "discount": null
   },
   "130393": {
-    "value": 15000.0,
+    "value": 20000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "15 000 ₽ ",
+    "value_string": "20 000 ₽ ",
     "discount": null
   }
 }
