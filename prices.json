@@ -56,16 +56,11 @@
     "discount": null
   },
   "58617": {
-    "value": 9750.0,
+    "value": 15000.0,
     "currency": "RUB",
     "unit_string": "за одного",
-    "value_string": "9750 ₽ за одного",
-    "discount": {
-      "value": 0.35,
-      "expiration_date": "2026-10-29",
-      "expiration_text": "ещё 1 час",
-      "original_price": 15000.0
-    }
+    "value_string": "15 000 ₽ за одного",
+    "discount": null
   },
   "53900": {
     "value": 4500.0,
@@ -89,16 +84,11 @@
     "discount": null
   },
   "51600": {
-    "value": 28000.0,
+    "value": 35000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "28 000 ₽ ",
-    "discount": {
-      "value": 0.2,
-      "expiration_date": "2026-10-29",
-      "expiration_text": "ещё 1 час",
-      "original_price": 35000.0
-    }
+    "value_string": "35 000 ₽ ",
+    "discount": null
   },
   "53155": {
     "value": 32000.0,
@@ -162,7 +152,7 @@
     "discount": {
       "value": 0.1,
       "expiration_date": "2026-11-01",
-      "expiration_text": "",
+      "expiration_text": "ещё 3 дня",
       "original_price": 4000.0
     }
   },
@@ -202,7 +192,7 @@
     "discount": {
       "value": 0.1,
       "expiration_date": "2026-11-01",
-      "expiration_text": "",
+      "expiration_text": "ещё 3 дня",
       "original_price": 45000.0
     }
   },
