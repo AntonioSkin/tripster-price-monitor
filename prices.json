@@ -63,7 +63,7 @@
     "discount": {
       "value": 0.35,
       "expiration_date": "2026-10-29",
-      "expiration_text": "ещё 13 часов",
+      "expiration_text": "ещё 7 часов",
       "original_price": 15000.0
     }
   },
@@ -96,7 +96,7 @@
     "discount": {
       "value": 0.2,
       "expiration_date": "2026-10-29",
-      "expiration_text": "ещё 13 часов",
+      "expiration_text": "ещё 7 часов",
       "original_price": 35000.0
     }
   },
@@ -249,10 +249,10 @@
     "discount": null
   },
   "130393": {
-    "value": 15000.0,
+    "value": 17000.0,
     "currency": "RUB",
     "unit_string": "",
-    "value_string": "15 000 ₽ ",
+    "value_string": "17 000 ₽ ",
     "discount": null
   }
 }
