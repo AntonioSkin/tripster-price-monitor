@@ -328,20 +328,17 @@ def main():
                 print(f"[{excursion['id']}] ✨ Первый запуск. Цена: {current_price['value']} ₽")
                 
             elif current_price['value'] != old_price['value']:
-                # Цена изменилась!
-                notification_key = f"{eid}_price_change_{current_price['value']}"
-                if notification_key not in sent_notifications:
-                    msg = format_price_change_message(excursion, old_price, current_price)
-                    if send_telegram_message(msg):
-                        print(f"[{excursion['id']}] ✅ Цена изменилась: {old_price['value']} → {current_price['value']}. Уведомление отправлено.")
-                        sent_notifications[notification_key] = datetime.now().isoformat()
-                    else:
-                        print(f"[{excursion['id']}] ⚠️ Ошибка отправки уведомления в Telegram; повторим на следующем запуске")
-                        # Не сохраняем новую цену: следующий запуск повторит уведомление.
-                        continue
+                # Цена изменилась. Уведомляем о каждом переходе между
+                # двумя последними проверками, даже если новая цена уже
+                # встречалась раньше (например, 3750 → 5500 → 3750 → 5500).
+                msg = format_price_change_message(excursion, old_price, current_price)
+                if send_telegram_message(msg):
+                    print(f"[{excursion['id']}] ✅ Цена изменилась: {old_price['value']} → {current_price['value']}. Уведомление отправлено.")
                 else:
-                    print(f"[{excursion['id']}] 🔄 Уведомление об этой цене уже отправлено. Дубликат пропущен.")
-                
+                    print(f"[{excursion['id']}] ⚠️ Ошибка отправки уведомления в Telegram; повторим на следующем запуске")
+                    # Не сохраняем новую цену: следующий запуск повторит уведомление.
+                    continue
+
                 last_prices[eid] = current_price
                 changes_made = True
                 
