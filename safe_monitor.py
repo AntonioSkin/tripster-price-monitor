@@ -94,7 +94,7 @@ def get_price(eid):
             pass
         for attempt in range(3):
             try:
-                response = session.get(api, headers={**HEADERS, "Referer": page}, timeout=15, allow_redirects=False)
+                response = session.get(api, headers={**HEADERS, "Referer": page}, timeout=15)
                 if response.status_code in (404, 410) and landing_status in (404, 410):
                     return None  # Checked and no longer available; never substitute a zero price.
                 if response.status_code == 200:
