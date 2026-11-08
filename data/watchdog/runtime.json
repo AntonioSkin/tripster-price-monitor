@@ -78,7 +78,7 @@
       "discount": {
         "value": 0.25,
         "expiration_date": "2026-11-10",
-        "expiration_text": "ещё 3 дня",
+        "expiration_text": "ещё 47 часов",
         "original_price": 47500.0
       }
     },
@@ -529,24 +529,8 @@
     "127581_price_change_45000.0": "2026-11-01T19:12:25.662626",
     "57434_price_change_3950.0": "2026-11-04T00:22:35.438071",
     "57434_price_change_3750.0": "2026-11-04T04:40:05.509174",
-    "51192_price_change_3750.0": "2026-11-04T07:48:51.241013"
+    "51192_price_change_3750.0": "2026-11-04T07:48:51.241013",
+    "58568_discount_0.25_2026-11-10": "2026-11-08T19:04:43.961820+00:00"
   },
-  "pending": {
-    "58568": {
-      "prepared_at": "2026-11-08T19:04:42.476499+00:00",
-      "price": {
-        "value": 35625.0,
-        "currency": "RUB",
-        "unit_string": "",
-        "value_string": "35 625 ₽ ",
-        "discount": {
-          "value": 0.25,
-          "expiration_date": "2026-11-10",
-          "expiration_text": "ещё 47 часов",
-          "original_price": 47500.0
-        }
-      },
-      "discount_key": "58568_discount_0.25_2026-11-10"
-    }
-  }
+  "pending": {}
 }
