@@ -36,10 +36,10 @@
       "discount": null
     },
     "83542": {
-      "value": 4200.0,
+      "value": 3700.0,
       "currency": "RUB",
       "unit_string": "за одного",
-      "value_string": "4200 ₽ за одного",
+      "value_string": "3700 ₽ за одного",
       "discount": null
     },
     "102873": {
@@ -532,17 +532,5 @@
     "51192_price_change_3750.0": "2026-11-04T07:48:51.241013",
     "58568_discount_0.25_2026-11-10": "2026-11-08T19:04:43.961820+00:00"
   },
-  "pending": {
-    "83542": {
-      "prepared_at": "2026-11-09T08:30:42.533267+00:00",
-      "price": {
-        "value": 3700.0,
-        "currency": "RUB",
-        "unit_string": "за одного",
-        "value_string": "3700 ₽ за одного",
-        "discount": null
-      },
-      "discount_key": null
-    }
-  }
+  "pending": {}
 }
