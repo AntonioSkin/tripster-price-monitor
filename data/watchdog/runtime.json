@@ -76,16 +76,11 @@
       "discount": null
     },
     "58568": {
-      "value": 35625.0,
+      "value": 47500.0,
       "currency": "RUB",
       "unit_string": "",
-      "value_string": "35 625 ₽ ",
-      "discount": {
-        "value": 0.25,
-        "expiration_date": "2026-11-10",
-        "expiration_text": "ещё 20 минут",
-        "original_price": 47500.0
-      }
+      "value_string": "47 500 ₽ ",
+      "discount": null
     },
     "70193": {
       "value": 35000.0,
@@ -537,17 +532,5 @@
     "51192_price_change_3750.0": "2026-11-04T07:48:51.241013",
     "58568_discount_0.25_2026-11-10": "2026-11-08T19:04:43.961820+00:00"
   },
-  "pending": {
-    "58568": {
-      "prepared_at": "2026-11-10T19:30:54.389269+00:00",
-      "price": {
-        "value": 47500.0,
-        "currency": "RUB",
-        "unit_string": "",
-        "value_string": "47 500 ₽ ",
-        "discount": null
-      },
-      "discount_key": null
-    }
-  }
+  "pending": {}
 }
