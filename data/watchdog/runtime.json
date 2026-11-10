@@ -532,5 +532,17 @@
     "51192_price_change_3750.0": "2026-11-04T07:48:51.241013",
     "58568_discount_0.25_2026-11-10": "2026-11-08T19:04:43.961820+00:00"
   },
-  "pending": {}
+  "pending": {
+    "96862": {
+      "prepared_at": "2026-11-10T05:55:33.986349+00:00",
+      "price": {
+        "value": 12000.0,
+        "currency": "RUB",
+        "unit_string": "за одного",
+        "value_string": "12 000 ₽ за одного",
+        "discount": null
+      },
+      "discount_key": null
+    }
+  }
 }
