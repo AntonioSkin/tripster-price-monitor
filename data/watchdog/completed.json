@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "checked_at": "2026-11-10T15:21:36.972140+00:00",
+  "checked_at": "2026-11-10T16:11:45.292456+00:00",
   "all_prices_checked": true,
   "delivery_complete": true,
   "recovery_safe": true,
@@ -42,5 +42,5 @@
   "unavailable_ids": [],
   "failed_ids": [],
   "uncertain_ids": [],
-  "completed_at": "2026-11-10T15:21:36.972140+00:00"
+  "completed_at": "2026-11-10T16:11:45.292456+00:00"
 }
