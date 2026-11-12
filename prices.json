@@ -21,7 +21,7 @@
     "discount": {
       "value": 0.15,
       "expiration_date": "2026-11-15",
-      "expiration_text": "",
+      "expiration_text": "ещё 3 дня",
       "original_price": 12000.0
     }
   },
