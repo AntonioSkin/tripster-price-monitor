@@ -71,10 +71,10 @@
       "discount": null
     },
     "58568": {
-      "value": 47500.0,
+      "value": 29000.0,
       "currency": "RUB",
       "unit_string": "",
-      "value_string": "47 500 ₽ ",
+      "value_string": "29 000 ₽ ",
       "discount": null
     },
     "70193": {
@@ -528,17 +528,5 @@
     "58568_discount_0.25_2026-11-10": "2026-11-08T19:04:43.961820+00:00",
     "96862_discount_0.15_2026-11-15": "2026-11-12T19:10:40.106491+00:00"
   },
-  "pending": {
-    "58568": {
-      "prepared_at": "2026-11-15T00:40:54.016644+00:00",
-      "price": {
-        "value": 29000.0,
-        "currency": "RUB",
-        "unit_string": "",
-        "value_string": "29 000 ₽ ",
-        "discount": null
-      },
-      "discount_key": null
-    }
-  }
+  "pending": {}
 }
