@@ -1,11 +1,10 @@
 {
-  "ok": true,
-  "checked_at": "2026-11-19T07:21:12.708503+00:00",
-  "all_prices_checked": true,
+  "ok": false,
+  "checked_at": "2026-11-19T07:42:47.528704+00:00",
+  "all_prices_checked": false,
   "delivery_complete": true,
   "recovery_safe": true,
   "checked_ids": [
-    51192,
     57434,
     96862,
     51584,
@@ -40,6 +39,8 @@
     130393
   ],
   "unavailable_ids": [],
-  "failed_ids": [],
+  "failed_ids": [
+    51192
+  ],
   "uncertain_ids": []
 }
