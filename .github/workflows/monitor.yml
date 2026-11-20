@@ -1,9 +1,15 @@
 name: Tripster Price Monitor
+run-name: ${{ inputs.watchdog_request_id && format('tripster-recovery:{0}', inputs.watchdog_request_id) || 'Tripster Price Monitor' }}
 
 on:
   schedule:
     - cron: '*/15 * * * *'
   workflow_dispatch:
+    inputs:
+      watchdog_request_id:
+        description: Optional recovery command correlation ID
+        required: false
+        type: string
   push:
     branches: [main]
     paths: ['monitor.py', 'safe_monitor.py', 'persist_bundle.py', 'test_safe_monitor.py', '.github/workflows/monitor.yml']
@@ -22,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 18
     outputs:
-      bundle: ${{ steps.upload.outcome == 'success' }}
+      bundle: ${{ steps.upload.outcome == 'success' || steps.upload_retry.outcome == 'success' }}
       artifact: ${{ steps.bundle.outputs.artifact }}
     steps:
       - uses: actions/checkout@v4
@@ -42,18 +48,41 @@ jobs:
           GITHUB_REPO: ${{ github.repository }}
           MONITOR_BUNDLE: ${{ runner.temp }}/monitor-bundle
         run: python safe_monitor.py
-      - name: Name the immutable task 7 bundle
-        id: bundle
-        if: always()
-        run: echo "artifact=monitor-task-7-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
         id: upload
         if: always()
+        continue-on-error: true
         with:
-          name: ${{ steps.bundle.outputs.artifact }}
+          name: monitor-task-7-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/monitor-bundle/
           if-no-files-found: error
           retention-days: 14
+      - name: Retry bundle upload without repeating collection or delivery
+        uses: actions/upload-artifact@v4
+        id: upload_retry
+        if: ${{ always() && steps.upload.outcome == 'failure' }}
+        continue-on-error: true
+        with:
+          # A new name avoids replacing a possibly accepted immutable upload.
+          name: monitor-task-7-${{ github.run_id }}-${{ github.run_attempt }}01
+          path: ${{ runner.temp }}/monitor-bundle/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Select the confirmed immutable task 7 bundle
+        id: bundle
+        if: always()
+        env:
+          FIRST_UPLOAD: ${{ steps.upload.outcome }}
+          RETRY_UPLOAD: ${{ steps.upload_retry.outcome }}
+        run: |
+          if [ "$FIRST_UPLOAD" = success ]; then
+            echo "artifact=monitor-task-7-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" >> "$GITHUB_OUTPUT"
+          elif [ "$RETRY_UPLOAD" = success ]; then
+            echo "artifact=monitor-task-7-$GITHUB_RUN_ID-${GITHUB_RUN_ATTEMPT}01" >> "$GITHUB_OUTPUT"
+          else
+            echo 'Task 7 bundle was not confirmed; collection was not repeated.'
+            exit 1
+          fi
   save:
     needs: collect
     if: ${{ always() && needs.collect.outputs.bundle == 'true' }}
