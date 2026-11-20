@@ -2,6 +2,10 @@ import copy
 import json
 from pathlib import Path
 import tempfile
+import os
+import re
+import subprocess
+import textwrap
 import unittest
 from unittest.mock import Mock, patch
 import requests
@@ -33,6 +37,26 @@ class MemoryStore:
 
 
 class SafetyTests(unittest.TestCase):
+    def test_upload_retry_selects_only_a_confirmed_bundle_without_repeating_collection(self):
+        source = (Path(__file__).parent / '.github/workflows/monitor.yml').read_text()
+        self.assertEqual(source.count('run: python safe_monitor.py'), 1)
+        self.assertEqual(source.count('uses: actions/upload-artifact@v4'), 2)
+        self.assertNotIn('overwrite: true', source)
+        script = textwrap.dedent(re.search(
+            r'      - name: Select the confirmed immutable task 7 bundle.*?        run: \|\n(.*?)(?=  save:)',
+            source, re.S).group(1))
+        for first, retry, expected in [('success', 'skipped', 'monitor-task-7-123-2'),
+                                       ('failure', 'success', 'monitor-task-7-123-201'),
+                                       ('failure', 'failure', None)]:
+            with tempfile.TemporaryDirectory() as directory:
+                output = Path(directory) / 'output'
+                result = subprocess.run(['bash', '-e', '-c', script], capture_output=True,
+                    env={**os.environ, 'FIRST_UPLOAD': first, 'RETRY_UPLOAD': retry,
+                         'GITHUB_OUTPUT': str(output), 'GITHUB_RUN_ID': '123', 'GITHUB_RUN_ATTEMPT': '2'})
+                self.assertEqual(result.returncode == 0, expected is not None)
+                self.assertEqual(output.read_text().strip() if output.exists() else None,
+                                 f'artifact={expected}' if expected else None)
+
     def test_reservation_is_durable_before_send_and_next_process_does_not_repeat(self):
         store, messages = MemoryStore(), []
         def send(text):
