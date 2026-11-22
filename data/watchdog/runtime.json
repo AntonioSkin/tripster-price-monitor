@@ -541,5 +541,17 @@
     "58568_discount_0.05_2026-11-21": "2026-11-20T04:15:51.810210+00:00",
     "51600_discount_0.05_2026-11-22": "2026-11-20T19:01:07.408894+00:00"
   },
-  "pending": {}
+  "pending": {
+    "51600": {
+      "prepared_at": "2026-11-22T05:20:51.877134+00:00",
+      "price": {
+        "value": 39000.0,
+        "currency": "RUB",
+        "unit_string": "",
+        "value_string": "39 000 ₽ ",
+        "discount": null
+      },
+      "discount_key": null
+    }
+  }
 }
