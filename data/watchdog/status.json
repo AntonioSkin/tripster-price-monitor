@@ -1,7 +1,7 @@
 {
-  "ok": true,
-  "checked_at": "2026-11-24T19:21:16.842746+00:00",
-  "all_prices_checked": true,
+  "ok": false,
+  "checked_at": "2026-11-24T19:41:50.374561+00:00",
+  "all_prices_checked": false,
   "delivery_complete": true,
   "recovery_safe": true,
   "checked_ids": [
@@ -31,7 +31,6 @@
     109950,
     59591,
     30319,
-    122651,
     127581,
     109984,
     107412,
@@ -40,6 +39,8 @@
     130393
   ],
   "unavailable_ids": [],
-  "failed_ids": [],
+  "failed_ids": [
+    122651
+  ],
   "uncertain_ids": []
 }
