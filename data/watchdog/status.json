@@ -1,6 +1,6 @@
 {
   "ok": false,
-  "checked_at": "2026-11-27T14:56:49.322504+00:00",
+  "checked_at": "2026-11-27T15:45:12.199710+00:00",
   "all_prices_checked": false,
   "delivery_complete": true,
   "recovery_safe": true,
@@ -18,12 +18,15 @@
     58568,
     70193,
     51600,
-    53155,
     54971,
+    75208
+  ],
+  "unavailable_ids": [],
+  "failed_ids": [
+    53155,
     55575,
     54209,
     52987,
-    75208,
     117523,
     120781,
     117366,
@@ -35,11 +38,8 @@
     127581,
     109984,
     107412,
-    107490
-  ],
-  "unavailable_ids": [],
-  "failed_ids": [
     128352,
+    107490,
     130393
   ],
   "uncertain_ids": []
